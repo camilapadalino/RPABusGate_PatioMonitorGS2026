@@ -1,0 +1,1142 @@
+{
+  "name": "Smart Bus Gate - RPA Final",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "89f907f7-9881-4b5b-bc25-7b8ced3f71d1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "856f6dda-31d7-49e5-84db-80f03108d42c",
+      "name": "Webhook",
+      "webhookId": "89f907f7-9881-4b5b-bc25-7b8ced3f71d1"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.evento }}",
+                    "rightValue": "CANCELA_ABERTA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "2aa74dab-effc-4bd8-a8a8-f59b39b35668"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cancela Aberta"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "fae7cfab-28ac-49bf-a36d-28c59daded2a",
+                    "leftValue": "={{ $json.body.evento }}",
+                    "rightValue": "CANCELA_FECHADA",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Cancela Fechada"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "e8d329be-4ee3-4fbe-8fd0-0a014eb4f9d7",
+                    "leftValue": "={{ $json.body.evento }}",
+                    "rightValue": "POSSIVEL_OBSTRUCAO",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "OBSTRUCAO"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        464,
+        -96
+      ],
+      "id": "5e9f262f-e852-43bb-a183-70bf5d4bf8f3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "71f5ffc7-8d63-480a-93d0-b7e04e4e1860",
+              "name": "dispositivo",
+              "value": "={{ $json.body.dispositivo }}",
+              "type": "string"
+            },
+            {
+              "id": "5c69f9c7-577b-43a0-b642-801ea71a4c3c",
+              "name": "evento",
+              "value": "={{ $json.body.evento}}",
+              "type": "string"
+            },
+            {
+              "id": "63c570fc-ef64-4810-a333-c53f4cba5586",
+              "name": "distancia_cm",
+              "value": "={{ $json.body.distancia_cm }}",
+              "type": "number"
+            },
+            {
+              "id": "fd655c28-e7cb-44a0-ad5e-5041959ff246",
+              "name": "movimento",
+              "value": "={{ $json.body.movimento }}",
+              "type": "boolean"
+            },
+            {
+              "id": "1ef418d7-bdbd-467f-9e14-72de3d3d9f59",
+              "name": "data_hora",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "78e5186c-fce6-434f-be42-9fd70ce726fa",
+              "name": "tipo_registro",
+              "value": "=ABERTURA_CANCELA",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        688,
+        -352
+      ],
+      "id": "14b63ba5-0d19-4384-acdb-dbe18c857e0a",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "538e26a2-6387-4db1-8611-bcbaa513c856",
+              "name": "dispositivo",
+              "value": "={{ $json.body.dispositivo }}",
+              "type": "string"
+            },
+            {
+              "id": "a3ccd840-2e7f-4e47-beca-ade72cbbb600",
+              "name": "evento",
+              "value": "={{ $json.body.evento }}",
+              "type": "string"
+            },
+            {
+              "id": "740639e2-8d1a-4d15-8a0c-14d274fe0031",
+              "name": "distancia_cm",
+              "value": "={{ $json.body.distancia_cm }}",
+              "type": "number"
+            },
+            {
+              "id": "a390758f-57c5-4f4c-af33-9152091adcc1",
+              "name": "movimento",
+              "value": "={{ $json.body.movimento }}",
+              "type": "boolean"
+            },
+            {
+              "id": "39868adf-a4e0-4eb3-a962-61e3531e5b15",
+              "name": "data_hora",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "99006080-8e5c-41bb-a7b7-d8f4341b8d3f",
+              "name": "tipo_registro",
+              "value": "FECHAMENTO_CANCELA",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        736,
+        -80
+      ],
+      "id": "7b0cf882-bb5f-4955-be30-8606103089fc",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "GSyWNu2ZAP9oJQbE",
+          "mode": "list",
+          "cachedResultName": "smart_bus_gate_auditoria",
+          "cachedResultUrl": "/projects/uX1jKK33x9orJD1b/datatables/GSyWNu2ZAP9oJQbE"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "movimento": "={{ $json.movimento }}",
+            "dispositivo": "={{ $json.dispositivo }}",
+            "evento": "={{ $json.evento }}",
+            "distancia_cm": "={{ $json.distancia_cm }}",
+            "data_hora": "={{ $json.data_hora }}",
+            "tipo_registro": "={{ $json.tipo_registro }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "dispositivo",
+              "displayName": "dispositivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "evento",
+              "displayName": "evento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "distancia_cm",
+              "displayName": "distancia_cm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "movimento",
+              "displayName": "movimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "data_hora",
+              "displayName": "data_hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "tipo_registro",
+              "displayName": "tipo_registro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        -208
+      ],
+      "id": "9779a980-2618-4814-a954-e6281eace1fc",
+      "name": "Insert row"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "03c77955-9160-4186-acb9-c129109a0e2e",
+              "leftValue": "={{ $json.body.evento }}",
+              "rightValue": "CANCELA_ABERTA",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "21404a47-7e74-48e7-b7a0-2c6bea7f80fd",
+              "leftValue": "={{ $json.body.evento }}",
+              "rightValue": "CANCELA_FECHADA",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "4210ff7b-1cf1-4d05-b2c8-143889663799",
+              "leftValue": "={{ $json.body.evento }}",
+              "rightValue": "POSSIVEL_OBSTRUCAO",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        224,
+        0
+      ],
+      "id": "e5486d12-ee89-45cf-973a-513d3973e057",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "0ea3a6c2-1b4d-47bd-bcdf-6d12201264c2",
+              "name": "dispositivo",
+              "value": "={{ $json.body.dispositivo ?? \"DESCONHECIDO\" }}",
+              "type": "string"
+            },
+            {
+              "id": "f83b9ee7-7112-43e5-9091-05d8a76e249f",
+              "name": "evento",
+              "value": "={{ $json.body.evento ?? \"NAO_INFORMADO\" }}",
+              "type": "string"
+            },
+            {
+              "id": "4f067db9-d087-4266-be46-5f44acee613e",
+              "name": "motivo_erro",
+              "value": "EVENTO_NAO_RECONHECIDO",
+              "type": "string"
+            },
+            {
+              "id": "9e8dbe48-02cd-421e-b224-30197e2c8486",
+              "name": "data_hora",
+              "value": "EVENTO_NAO_RECONHECIDO",
+              "type": "string"
+            },
+            {
+              "id": "cef0bd01-22af-47f8-b09f-53a4223ae101",
+              "name": "status",
+              "value": "REJEITADO",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        336
+      ],
+      "id": "2d5441c1-6219-4866-bd15-55da255e0e12",
+      "name": "Auditoria - Evento Invalido"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "sPieJzAnBRGG1V7D",
+          "mode": "list",
+          "cachedResultName": "smart_bus_gate_erros",
+          "cachedResultUrl": "/projects/uX1jKK33x9orJD1b/datatables/sPieJzAnBRGG1V7D"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "dispositivo": "={{ $json.dispositivo }}",
+            "evento": "={{ $json.evento }}",
+            "motivo_erro": "={{ $json.motivo_erro }}",
+            "data_hora": "={{ $now.toISO() }}",
+            "status": "={{ $json.status }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "dispositivo",
+              "displayName": "dispositivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "evento",
+              "displayName": "evento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "motivo_erro",
+              "displayName": "motivo_erro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "data_hora",
+              "displayName": "data_hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        736,
+        336
+      ],
+      "id": "4a09d740-bf57-4c01-942c-d524d6c0765d",
+      "name": "Insert row1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7f7c86de-ef32-4108-98ea-702d46157702",
+              "name": "dispositivo",
+              "value": "={{ $json.body.dispositivo }}",
+              "type": "string"
+            },
+            {
+              "id": "b817f365-8a88-4ab4-b0bf-7d83e9dc3b51",
+              "name": "evento",
+              "value": "={{ $json.body.evento }}",
+              "type": "string"
+            },
+            {
+              "id": "0bd3a965-7f04-41b2-8c2b-56ada7fc354b",
+              "name": "distancia_cm",
+              "value": "={{ $json.body.distancia_cm }}",
+              "type": "number"
+            },
+            {
+              "id": "7dabafb7-37f3-4b82-85e2-f6a26eab7550",
+              "name": "tempo_parado",
+              "value": "={{ Number($json.body.tempo_parado) }}",
+              "type": "number"
+            },
+            {
+              "id": "03a47036-0278-41e0-904a-bf522b4ac378",
+              "name": "movimento",
+              "value": "={{ $json.body.movimento }}",
+              "type": "boolean"
+            },
+            {
+              "id": "4397180e-4be5-4331-b811-dc3e6cbbbede",
+              "name": "data_hora",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "f7ece2e7-b7de-4c41-a9d2-cd47c8cdedb5",
+              "name": "tipo_registro",
+              "value": "=ALERTA_OBSTRUCAO",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        736,
+        144
+      ],
+      "id": "5dbcc217-da32-4239-a04c-648a8882793e",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "cPB33hZ3yDFaFf8w",
+          "mode": "list",
+          "cachedResultName": "smart_bus_gate_alertas",
+          "cachedResultUrl": "/projects/uX1jKK33x9orJD1b/datatables/cPB33hZ3yDFaFf8w"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "movimento": "={{ $json.movimento }}",
+            "dispositivo": "={{ $json.dispositivo }}",
+            "evento": "={{ $json.evento }}",
+            "distancia_cm": "={{ $json.distancia_cm }}",
+            "tempo_parado": "={{ $json.tempo_parado }}",
+            "data_hora": "={{ $json.data_hora }}",
+            "tipo_registro": "={{ $json.tipo_registro }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "dispositivo",
+              "displayName": "dispositivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "evento",
+              "displayName": "evento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "distancia_cm",
+              "displayName": "distancia_cm",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "tempo_parado",
+              "displayName": "tempo_parado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "movimento",
+              "displayName": "movimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "data_hora",
+              "displayName": "data_hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "tipo_registro",
+              "displayName": "tipo_registro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        960,
+        144
+      ],
+      "id": "c82f5d61-aafe-405c-9e0b-af9da7d95074",
+      "name": "Insert row2"
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst eventos = [\n  {\n    dispositivo: \"SMART_BUS_GATE_01\",\n    evento: \"CANCELA_ABERTA\",\n    distancia_cm: 13,\n    movimento: true,\n    tempo_parado: 0,\n    cancela: \"ABERTA\"\n  },\n  {\n    dispositivo: \"SMART_BUS_GATE_01\",\n    evento: \"CANCELA_FECHADA\",\n    distancia_cm: 45,\n    movimento: false,\n    tempo_parado: 0,\n    cancela: \"FECHADA\"\n  },\n  {\n    dispositivo: \"SMART_BUS_GATE_01\",\n    evento: \"POSSIVEL_OBSTRUCAO\",\n    distancia_cm: 12,\n    movimento: true,\n    tempo_parado: 30,\n    cancela: \"ABERTA\"\n  }\n];\n\nreturn eventos.map(evento => ({\n  json: evento\n}));\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        592
+      ],
+      "id": "6a996f2b-8b07-4503-a0cd-b9a36aab3614",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        416,
+        592
+      ],
+      "id": "c409bb27-572c-4e1c-af07-e65826e32e85",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://globalsolutionrpa26.app.n8n.cloud/webhook/smart-bus-gate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        720,
+        704
+      ],
+      "id": "b398a9e1-d955-4af4-ade5-0af55024abdc",
+      "name": "HTTP Request",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        592
+      ],
+      "id": "d133fa31-3286-4213-a6b7-b598ab7250aa",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "954fb958-9e17-4ed7-83c6-b5d21b97ecda",
+              "name": "tipo_registro",
+              "value": "ERRO_INTEGRACAO",
+              "type": "string"
+            },
+            {
+              "id": "9ea6ec24-037e-4b64-afdd-9716dba3ec84",
+              "name": "origem",
+              "value": "HTTP_REQUEST_RPA",
+              "type": "string"
+            },
+            {
+              "id": "2e7b3f70-04c4-4e56-acb7-92376b84a709",
+              "name": "mensagem_erro",
+              "value": "={{ $json.error?.message || $json.message || 'Falha na requisicao HTTP' }}",
+              "type": "string"
+            },
+            {
+              "id": "dc5280d9-1e36-4304-b46e-33c8e5676e83",
+              "name": "data_hora",
+              "value": "={{ $now.toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        944,
+        800
+      ],
+      "id": "48a0a440-3909-43b4-91ab-42fd49fd6d5e",
+      "name": "Registrar Falha HTTP"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "sPieJzAnBRGG1V7D",
+          "mode": "list",
+          "cachedResultName": "smart_bus_gate_erros",
+          "cachedResultUrl": "/projects/uX1jKK33x9orJD1b/datatables/sPieJzAnBRGG1V7D"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "dispositivo": "SMART_BUS_GATE_01",
+            "evento": "ERRO_INTEGRACAO_HTTP",
+            "motivo_erro": "={{ $json.mensagem_erro }}",
+            "data_hora": "={{ $json.data_hora }}",
+            "status": "FALHA_HTTP"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "dispositivo",
+              "displayName": "dispositivo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "evento",
+              "displayName": "evento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "motivo_erro",
+              "displayName": "motivo_erro",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "data_hora",
+              "displayName": "data_hora",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1168,
+        800
+      ],
+      "id": "50c6d2be-06ec-495c-adb4-ee585a124126",
+      "name": "Insert row3"
+    },
+    {
+      "parameters": {
+        "path": "eventos-smart-bus-gate",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        1136
+      ],
+      "id": "662c8772-f2c5-4ab9-977f-01e636ba0335",
+      "name": "Webhook1",
+      "webhookId": "61116f09-912a-4f12-922e-16b317b89fa4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "3yKDuOCykn0iy5Q5",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "GSyWNu2ZAP9oJQbE",
+          "mode": "list",
+          "cachedResultName": "smart_bus_gate_auditoria",
+          "cachedResultUrl": "/projects/uX1jKK33x9orJD1b/datatables/GSyWNu2ZAP9oJQbE"
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        1136
+      ],
+      "id": "80e58a51-0264-4e3f-84bc-cd618311958d",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "jsCode": "const registros = $input.all();\n\nconst eventos = registros\n  .map(item => item.json)\n  .filter(item => item.dispositivo && item.evento)\n  .map(item => ({\n    id: item.id,\n    dispositivo: item.dispositivo,\n    evento: item.evento,\n    distancia_cm: item.distancia_cm,\n    movimento: item.movimento,\n    tipo_registro: item.tipo_registro,\n    data_hora: item.data_hora\n  }))\n  .sort((a, b) =>\n    new Date(b.data_hora) - new Date(a.data_hora)\n  );\n\nreturn [\n  {\n    json: {\n      sucesso: true,\n      total: eventos.length,\n      eventos\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        464,
+        1136
+      ],
+      "id": "5af25b50-f40b-40e3-a01c-b17e76735f03",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        688,
+        1136
+      ],
+      "id": "5adad1df-b6d6-41f8-add4-3a4af5d13719",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Auditoria - Evento Invalido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Auditoria - Evento Invalido": {
+      "main": [
+        [
+          {
+            "node": "Insert row1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Insert row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Registrar Falha HTTP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar Falha HTTP": {
+      "main": [
+        [
+          {
+            "node": "Insert row3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "2338c9fc-4ea1-4497-beb8-b0d0193aa71a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ddd3f4acd4017dace629eb8bb8d4ca4570d0e9309e792ec54642f7d58bfdbed5"
+  },
+  "nodeGroups": [],
+  "id": "bjXS7YNa4wEjYXXh",
+  "tags": []
+}
