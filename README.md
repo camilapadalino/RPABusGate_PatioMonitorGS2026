@@ -24,7 +24,7 @@
 - **Documentação Técnica:**
   O relatório técnico completo da automação RPA está disponível para consulta:
 
-📘 [Clique aqui para visualizar o Relatório Técnico em PDF](docs/Relatorio_Tecnico_RPA_Patio_Monitor.pdf)
+📘 [Clique aqui para visualizar o Relatório Técnico em PDF](docs/relatorio_tecnico_rpa.pdf)
 
 - **Repositório Smart Bus Gate - Maker Lab:**  
   https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
