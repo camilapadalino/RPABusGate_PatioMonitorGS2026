@@ -4,14 +4,14 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "89f907f7-9881-4b5b-bc25-7b8ced3f71d1",
+        "path": "smart-bus-gate-auditoria",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.2,
       "position": [
         0,
-        0
+        32
       ],
       "id": "856f6dda-31d7-49e5-84db-80f03108d42c",
       "name": "Webhook",
@@ -102,8 +102,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.5,
       "position": [
-        464,
-        -96
+        448,
+        -176
       ],
       "id": "5e9f262f-e852-43bb-a183-70bf5d4bf8f3",
       "name": "Switch"
@@ -155,7 +155,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        688,
+        672,
         -352
       ],
       "id": "14b63ba5-0d19-4384-acdb-dbe18c857e0a",
@@ -208,8 +208,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        736,
-        -80
+        672,
+        -160
       ],
       "id": "7b0cf882-bb5f-4955-be30-8606103089fc",
       "name": "Edit Fields1"
@@ -304,8 +304,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        1024,
-        -208
+        896,
+        -256
       ],
       "id": "9779a980-2618-4814-a954-e6281eace1fc",
       "name": "Insert row"
@@ -359,7 +359,7 @@
       "typeVersion": 2.4,
       "position": [
         224,
-        0
+        32
       ],
       "id": "e5486d12-ee89-45cf-973a-513d3973e057",
       "name": "If"
@@ -406,7 +406,7 @@
       "typeVersion": 3.5,
       "position": [
         448,
-        336
+        224
       ],
       "id": "2d5441c1-6219-4866-bd15-55da255e0e12",
       "name": "Auditoria - Evento Invalido"
@@ -490,8 +490,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        736,
-        336
+        672,
+        224
       ],
       "id": "4a09d740-bf57-4c01-942c-d524d6c0765d",
       "name": "Insert row1"
@@ -549,8 +549,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        736,
-        144
+        672,
+        32
       ],
       "id": "5dbcc217-da32-4239-a04c-648a8882793e",
       "name": "Edit Fields2"
@@ -656,8 +656,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        960,
-        144
+        896,
+        32
       ],
       "id": "c82f5d61-aafe-405c-9e0b-af9da7d95074",
       "name": "Insert row2"
@@ -669,7 +669,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        192,
+        224,
         592
       ],
       "id": "6a996f2b-8b07-4503-a0cd-b9a36aab3614",
@@ -682,8 +682,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        416,
-        592
+        432,
+        448
       ],
       "id": "c409bb27-572c-4e1c-af07-e65826e32e85",
       "name": "Loop Over Items"
@@ -691,7 +691,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://globalsolutionrpa26.app.n8n.cloud/webhook/smart-bus-gate",
+        "url": "https://globalsolutionrpa26.app.n8n.cloud/webhook/smart-bus-gate-auditoria",
         "sendBody": true,
         "specifyBody": "json",
         "jsonBody": "={{ $json }}",
@@ -700,8 +700,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        720,
-        704
+        672,
+        448
       ],
       "id": "b398a9e1-d955-4af4-ade5-0af55024abdc",
       "name": "HTTP Request",
@@ -753,8 +753,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        944,
-        800
+        896,
+        448
       ],
       "id": "48a0a440-3909-43b4-91ab-42fd49fd6d5e",
       "name": "Registrar Falha HTTP"
@@ -838,8 +838,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        1168,
-        800
+        1120,
+        528
       ],
       "id": "50c6d2be-06ec-495c-adb4-ee585a124126",
       "name": "Insert row3"
@@ -854,8 +854,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.2,
       "position": [
-        16,
-        1136
+        0,
+        816
       ],
       "id": "662c8772-f2c5-4ab9-977f-01e636ba0335",
       "name": "Webhook1",
@@ -881,8 +881,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        240,
-        1136
+        224,
+        816
       ],
       "id": "80e58a51-0264-4e3f-84bc-cd618311958d",
       "name": "Get row(s)"
@@ -894,8 +894,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        464,
-        1136
+        448,
+        816
       ],
       "id": "5af25b50-f40b-40e3-a01c-b17e76735f03",
       "name": "Code in JavaScript1"
@@ -911,8 +911,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        688,
-        1136
+        672,
+        816
       ],
       "id": "5adad1df-b6d6-41f8-add4-3a4af5d13719",
       "name": "Respond to Webhook"
@@ -1131,7 +1131,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "2338c9fc-4ea1-4497-beb8-b0d0193aa71a",
+  "versionId": "f5498bed-ffe5-4113-91e8-794c5de83436",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "ddd3f4acd4017dace629eb8bb8d4ca4570d0e9309e792ec54642f7d58bfdbed5"
