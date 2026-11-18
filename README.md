@@ -15,17 +15,19 @@
 
 ## 🔗 Links do projeto
 
-- **Simulação Smart Bus Gate - Wokwi:**  
-  https://wokwi.com/projects/480155608742885377
-
-- **Repositório Smart Bus Gate - Maker Lab:**  
-  https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
-
 - **MVP Pátio Monitor:**  
   https://patio-monitor-production.up.railway.app/?utm_source=chatgpt.com
 
 - **Vídeo demonstrativo RPA:**  
   https://www.youtube.com/watch?v=5r3gIS0Ebfg
+
+- **Documentação Técnica:**
+  O relatório técnico completo da automação RPA está disponível para consulta:
+
+📘 [Clique aqui para visualizar o Relatório Técnico em PDF](docs/Relatorio_Tecnico_RPA_Patio_Monitor.pdf)
+
+- **Repositório Smart Bus Gate - Maker Lab:**  
+  https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
 
 ---
 
