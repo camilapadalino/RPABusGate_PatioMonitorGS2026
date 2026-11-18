@@ -358,19 +358,19 @@ Patio-Monitor-RPA/
 │
 ├── docs/
 │   ├── relatorio_tecnico_rpa.pdf
-│   └── bpmn_smart_bus_gate.png
+│   ├── bpmn_smart_bus_gate.png
 │   └── fluxograma.png
 │
 ├── assets/
 │   ├── fluxo_auditoria.png
 │   ├── fluxo_processamento_lote.png
-│   ├── fluxo_consulta_get.png
+│   └── fluxo_consulta_get.png
 │
 ├── logs/
 │   └── auditoria_smart_bus_gate.csv
 │
 └── tests/
-    └── errodevalidacao.png
+    ├── errodevalidacao.png
     └── testedofluxocompleto.png
 ```
 ---
@@ -388,7 +388,7 @@ Patio-Monitor-RPA/
 ### Etapas
 
 1. Acessar uma instância do n8n.
-2. Importar o arquivo JSON disponível na pasta `workflows/`.
+2. Importar o arquivo JSON disponível na pasta `N8N/`.
 3. Verificar os três fluxos funcionais do workflow.
 4. Configurar os nós Webhook e seus respectivos caminhos.
 5. Criar ou selecionar as Data Tables utilizadas pela automação.
