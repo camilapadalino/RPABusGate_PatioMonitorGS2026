@@ -13,6 +13,22 @@
 
 ---
 
+## 🔗 Links do projeto
+
+- **Simulação Smart Bus Gate - Wokwi:**  
+  https://wokwi.com/projects/480155608742885377
+
+- **Repositório Smart Bus Gate - Maker Lab:**  
+  https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
+
+- **MVP Pátio Monitor:**  
+  https://patio-monitor-production.up.railway.app/?utm_source=chatgpt.com
+
+- **Vídeo demonstrativo RPA:**  
+  https://www.youtube.com/watch?v=5r3gIS0Ebfg
+
+---
+
 ## 📌 Sobre o projeto
 
 O **Pátio Monitor** é uma proposta de monitoramento inteligente voltada à organização, ao acompanhamento e à rastreabilidade das operações em pátios e terminais de ônibus. O projeto integra tecnologias de Internet das Coisas (IoT), Inteligência Artificial (IA) e automação de processos para demonstrar como soluções digitais podem apoiar a gestão operacional do transporte coletivo.
@@ -463,22 +479,6 @@ O vídeo demonstrativo apresenta o funcionamento da automação desenvolvida no 
 - Tratamento de falhas HTTP.
 - Consulta dos registros por meio da API GET.
 - Integração com o projeto Smart Bus Gate.
-
----
-
-## 🔗 Links do projeto
-
-- **Simulação Smart Bus Gate — Wokwi:**  
-  https://wokwi.com/projects/480155608742885377
-
-- **Repositório Smart Bus Gate — Maker Lab:**  
-  https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
-
-- **MVP Pátio Monitor:**  
-  https://patio-monitor-production.up.railway.app/?utm_source=chatgpt.com
-
-- **Vídeo demonstrativo RPA:**  
-  [Adicionar link do vídeo]
 
 ---
 
