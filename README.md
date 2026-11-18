@@ -475,7 +475,7 @@ O vídeo demonstrativo apresenta o funcionamento da automação desenvolvida no 
   https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
 
 - **MVP Pátio Monitor:**  
-  [Adicionar link do MVP]
+  https://patio-monitor-production.up.railway.app/?utm_source=chatgpt.com
 
 - **Vídeo demonstrativo RPA:**  
   [Adicionar link do vídeo]
