@@ -1,8 +1,7 @@
-
 # 🚌 Pátio Monitor | Automação RPA
 
-### Global Solution 2026.2 — FIAP
-**Tema: CitizenTech | Robotic Process Automation**
+**Global Solution 2026.2 — FIAP**   
+**Disciplina:** Robotic Process Automation (RPA)
 
 ## 👥 Integrantes
 
@@ -16,129 +15,222 @@
 
 ## 📌 Sobre o projeto
 
-O **Pátio Monitor** é uma proposta de monitoramento inteligente voltada à organização e ao acompanhamento das operações em pátios e terminais de ônibus, utilizando tecnologias de automação, IoT e Inteligência Artificial.
+O **Pátio Monitor** é uma proposta de monitoramento inteligente voltada à organização, ao acompanhamento e à rastreabilidade das operações em pátios e terminais de ônibus. O projeto integra tecnologias de Internet das Coisas (IoT), Inteligência Artificial (IA) e automação de processos para demonstrar como soluções digitais podem apoiar a gestão operacional do transporte coletivo.
 
-Como parte da solução, desenvolvemos o **Smart Bus Gate**, um protótipo de cancela automatizada que utiliza um microcontrolador ESP32, sensores ultrassônico e PIR, além de um servomotor para controlar a abertura e o fechamento da cancela.
+Como parte da solução, desenvolvemos o **Smart Bus Gate**, um protótipo de cancela automatizada que utiliza um microcontrolador ESP32, sensor ultrassônico, sensor PIR e servomotor para controlar a abertura e o fechamento da cancela de acordo com as condições identificadas no ambiente.
 
-Na disciplina de **Robotic Process Automation (RPA)**, desenvolvemos automações utilizando a plataforma **n8n**, responsáveis por receber, processar e registrar os eventos gerados pelo protótipo. A solução também disponibiliza os registros por meio de uma API, permitindo sua utilização pelo MVP do Pátio Monitor.
+Na disciplina de **Robotic Process Automation (RPA)**, desenvolvemos uma automação utilizando a plataforma **n8n Cloud**, responsável pelo recebimento, validação, processamento e armazenamento dos eventos operacionais gerados pelo protótipo.
 
-O desenvolvimento do protótipo físico simulado, sua lógica de funcionamento e a integração com Inteligência Artificial estão documentados no repositório da disciplina de **Maker Lab**, que complementa esta entrega de RPA.
+A solução também disponibiliza uma API HTTP GET para consulta dos registros, permitindo sua utilização pelo MVP do Pátio Monitor.
 
-🔗 **[Acessar o repositório Smart Bus Gate — Maker Lab](https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26.git)**
+O desenvolvimento do protótipo IoT, sua lógica de funcionamento e a integração com Inteligência Artificial estão documentados no repositório da disciplina de Maker Lab, que complementa esta entrega.
+
+🔗 [Acessar o repositório Smart Bus Gate — Maker Lab](https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26)
+
+---
 
 ## 🎯 Objetivos
 
-- Automatizar o recebimento de eventos do Smart Bus Gate.
-- Registrar as operações realizadas pela cancela.
-- Aplicar regras de decisão aos eventos recebidos.
-- Processar múltiplos registros de forma automatizada.
-- Identificar e tratar falhas em requisições HTTP.
-- Manter um histórico para auditoria e rastreabilidade.
-- Disponibilizar os dados para integração com o MVP.
+A automação RPA foi desenvolvida com os seguintes objetivos:
+
+- Automatizar o recebimento dos eventos gerados pelo Smart Bus Gate.
+- Validar e classificar as ocorrências operacionais.
+- Registrar eventos de abertura, fechamento e possíveis obstruções.
+- Manter um histórico organizado para auditoria e rastreabilidade.
+- Processar múltiplos registros por meio de estruturas de repetição.
+- Aplicar regras de decisão durante a execução.
+- Identificar, tratar e registrar falhas em requisições HTTP.
+- Disponibilizar os registros por meio de uma API para integração com o MVP.
+
+---
 
 ## 🛠️ Tecnologias utilizadas
 
 | Tecnologia | Aplicação |
 |---|---|
-| n8n Cloud | Desenvolvimento dos workflows RPA |
-| Webhooks HTTP | Recebimento e consulta de eventos |
-| Data Tables | Armazenamento dos registros |
-| JavaScript | Tratamento e formatação dos dados |
-| JSON | Comunicação entre os componentes |
-| Wokwi | Simulação do Smart Bus Gate |
-| ESP32 | Controle do protótipo IoT |
-| PowerShell | Testes das requisições HTTP |
+| n8n Cloud | Orquestração dos fluxos de automação |
+| Webhooks HTTP | Recebimento de eventos e consulta à API |
+| Data Tables | Persistência dos registros operacionais |
+| JavaScript | Validação, filtragem e organização dos dados |
+| JSON | Comunicação e intercâmbio de informações |
+| Wokwi | Simulação do protótipo Smart Bus Gate |
+| ESP32 | Controle dos sensores e da cancela |
+| PowerShell | Execução de testes HTTP e validação da API |
+| GitHub | Versionamento e disponibilização dos artefatos |
+
+---
 
 ## 🔄 Arquitetura da solução
 
-O sistema utiliza o ESP32 para gerar eventos operacionais,
-que são enviados ao n8n por meio de requisições HTTP.
+A automação foi desenvolvida na plataforma **n8n Cloud**, sendo organizada em um único workflow denominado **Smart Bus Gate – RPA Completo**.
 
-O RPA recebe essas informações, executa as regras
-configuradas e registra os dados para consulta posterior.
+Esse workflow reúne três fluxos funcionais, cada um com responsabilidades e formas de acionamento específicas.
+
+### Fluxo 1 — Auditoria de Eventos
+
+Responsável pelo recebimento, validação, classificação e armazenamento dos eventos operacionais enviados pelo ESP32.
 
 ```text
 ESP32 / Wokwi
       |
       v
-Webhook de auditoria
+Webhook HTTP POST
       |
       v
-Regras de decisão
+Validação dos dados
       |
       v
-Data Tables do n8n
+Classificação do evento
       |
       v
-API de consulta (GET)
-      |
-      v
-MVP Pátio Monitor
+Registro nas Data Tables
 ```
 
-A API de consulta disponibiliza os dados para o MVP.
-A conexão com a interface do portal é uma etapa de
-integração entre os componentes do projeto.
+### Fluxo 2 — Processamento em Lote e Tratamento de Falhas
 
-## ⚙️ Workflows desenvolvidos
-
-### 1. Smart Bus Gate - Auditoria RPA
-
-Responsável por receber os eventos enviados pelo
-ESP32 e registrar as informações na Data Table
-`smart_bus_gate_auditoria`.
-
-Entre os dados registrados estão:
-
-- Identificação do dispositivo.
-- Tipo de evento.
-- Distância identificada pelo sensor.
-- Estado de movimento.
-- Tipo de registro.
-- Data e hora da ocorrência.
-
-O histórico permite acompanhar os eventos de
-abertura e fechamento da cancela.
-
-### 2. Smart Bus Gate - RPA Completo
-
-Responsável pelas funcionalidades complementares
-de automação, incluindo:
-
-- Processamento de eventos em lote.
-- Repetição de operações.
-- Aplicação de regras de decisão.
-- Requisições HTTP.
-- Tratamento de falhas.
-- Integração para consulta dos dados pelo MVP.
-
-A API de consulta está implementada neste workflow,
-não sendo necessário um terceiro fluxo independente.
-
-## 🔌 Integração com o MVP
-
-O RPA disponibiliza uma API HTTP para consulta
-dos eventos armazenados.
-
-**Método:** GET
-
-**Endpoint:**
+Responsável pela execução automatizada de múltiplos eventos de teste, utilizando estruturas de repetição, requisições HTTP e mecanismos de tratamento de exceções.
 
 ```text
-/webhook/eventos-smart-bus-gate
+Gatilho manual
+      |
+      v
+Geração de eventos de teste
+      |
+      v
+Loop Over Items
+      |
+      v
+HTTP Request
+      |
+      +---- Sucesso ----> Próximo item
+      |
+      +---- Erro -------> Registrar falha
+                                |
+                                v
+                           Data Table
+                                |
+                                v
+                           Próximo item
 ```
 
-**Autenticação:** Header `x-api-key`
+### Fluxo 3 — Consulta de Eventos para o MVP
 
-A resposta utiliza JSON e contém os seguintes campos:
+Responsável pela disponibilização dos registros armazenados por meio de uma API HTTP GET autenticada.
+
+```text
+Requisição HTTP GET
+      |
+      v
+Webhook de consulta
+      |
+      v
+Get row(s) — Data Table
+      |
+      v
+Code in JavaScript
+      |
+      v
+Respond to Webhook
+      |
+      v
+Resposta JSON
+```
+
+Os três fluxos estão organizados dentro do mesmo workflow, mas possuem gatilhos e responsabilidades independentes.
+
+O **Fluxo 1** armazena os eventos operacionais, enquanto o **Fluxo 3** consulta esses registros quando uma requisição GET é realizada. O **Fluxo 2** permite testar o processamento automatizado e os mecanismos de tratamento de falhas.
+
+Essa organização centraliza as funcionalidades de RPA e mantém a separação lógica das operações.
+
+---
+
+## ⚙️ Funcionalidades desenvolvidas
+
+### 1. Auditoria de Eventos
+
+O fluxo de auditoria recebe eventos do Smart Bus Gate por meio de requisições HTTP POST.
+
+Após o recebimento, as informações passam por etapas de validação e classificação, permitindo identificar ocorrências relacionadas ao funcionamento da cancela.
+
+Os eventos são armazenados na Data Table `smart_bus_gate_auditoria`.
+
+Entre os campos registrados estão:
 
 | Campo | Descrição |
 |---|---|
-| sucesso | Indica o resultado da consulta |
-| total | Quantidade de eventos válidos |
-| eventos | Lista de registros retornados |
+| `dispositivo` | Identificação do dispositivo IoT |
+| `evento` | Tipo de ocorrência identificada |
+| `distancia_cm` | Distância detectada pelo sensor ultrassônico |
+| `movimento` | Estado do sensor de movimento |
+| `tipo_registro` | Classificação utilizada na auditoria |
+| `data_hora` | Data e hora da ocorrência |
 
-Cada evento pode conter:
+Entre os eventos observados nos testes estão `CANCELA_ABERTA` e `CANCELA_FECHADA`.
+
+A automação também contempla o direcionamento de possíveis ocorrências de obstrução, conforme as regras configuradas.
+
+### 2. Processamento em Lote e Tratamento de Falhas
+
+O segundo fluxo demonstra a aplicação de conceitos de automação de processos, incluindo:
+
+- Geração de eventos de teste utilizando JavaScript.
+- Processamento individual de múltiplos itens.
+- Estruturas de repetição com `Loop Over Items`.
+- Execução de requisições HTTP.
+- Diferenciação entre resultados de sucesso e erro.
+- Tratamento de exceções.
+- Registro estruturado das falhas identificadas.
+
+Durante os testes, foi executado um cenário controlado de falha HTTP 404, utilizando uma rota inexistente.
+
+A ocorrência foi encaminhada ao mecanismo de tratamento de erros e registrada para auditoria, demonstrando a capacidade da automação de identificar e documentar falhas de integração.
+
+### 3. Consulta de Eventos para o MVP
+
+O terceiro fluxo disponibiliza uma API HTTP GET para consulta dos registros operacionais armazenados.
+
+O processo é composto pelos seguintes nós:
+
+1. `Webhook` — recebe a requisição GET.
+2. `Get row(s)` — consulta os registros da Data Table.
+3. `Code in JavaScript` — filtra, seleciona e organiza os dados.
+4. `Respond to Webhook` — retorna a resposta JSON.
+
+O JavaScript realiza o tratamento das informações, desconsiderando registros sem identificação de dispositivo ou tipo de evento e organizando os resultados do mais recente para o mais antigo.
+
+A API estabelece a interface de comunicação entre a automação RPA e o MVP Pátio Monitor.
+
+---
+
+## 🔌 Integração com o MVP
+
+A API disponibiliza os eventos operacionais para consulta pela plataforma Pátio Monitor.
+
+### Endpoint
+
+**Método:** `GET`
+
+**Caminho:**
+
+```http
+/webhook/eventos-smart-bus-gate
+```
+
+**Autenticação:** cabeçalho HTTP `x-api-key`.
+
+A URL completa depende da instância n8n utilizada na implantação.
+
+### Estrutura da resposta
+
+A API retorna um objeto JSON contendo:
+
+| Campo | Descrição |
+|---|---|
+| `sucesso` | Indica o resultado da consulta |
+| `total` | Quantidade de registros válidos |
+| `eventos` | Lista de eventos operacionais |
+
+Cada evento contém os seguintes campos:
 
 - `id`
 - `dispositivo`
@@ -148,7 +240,7 @@ Cada evento pode conter:
 - `tipo_registro`
 - `data_hora`
 
-Exemplo simplificado de resposta:
+### Exemplo de resposta
 
 ```json
 {
@@ -168,115 +260,227 @@ Exemplo simplificado de resposta:
 }
 ```
 
-A consulta deve ser realizada preferencialmente
-pelo backend do MVP, evitando a exposição da
-chave de autenticação no frontend.
+O exemplo apresenta a estrutura de um registro individual. O campo `total` varia conforme a quantidade de eventos válidos disponíveis no momento da consulta.
+
+### Recomendações de integração
+
+Para integração com o MVP, recomenda-se:
+
+- Realizar as requisições autenticadas por uma camada de backend.
+- Manter a chave de autenticação fora do código frontend.
+- Utilizar o campo `eventos` para alimentar tabelas, indicadores e histórico operacional.
+- Utilizar `total` para apresentar a quantidade de registros retornados.
+- Considerar os campos `evento` e `data_hora` para organização e visualização das ocorrências.
+- Tratar situações de indisponibilidade da API e respostas de acesso negado.
+
+A API foi implementada e validada em testes de consulta. O consumo diretamente na interface do MVP constitui uma etapa de integração entre os componentes do projeto.
+
+---
 
 ## 📊 Regras de negócio
 
-As automações foram organizadas para:
+As regras implementadas na automação contemplam:
 
-1. Receber os eventos gerados pelo protótipo.
-2. Identificar o tipo de ocorrência.
-3. Registrar as informações de auditoria.
-4. Processar múltiplos eventos quando necessário.
-5. Verificar o resultado das requisições HTTP.
-6. Tratar falhas identificadas.
-7. Disponibilizar o histórico para consulta.
+| Regra | Descrição |
+|---|---|
+| Recebimento de eventos | Receber dados operacionais por webhook HTTP POST |
+| Validação | Verificar as informações necessárias ao processamento |
+| Classificação | Identificar o tipo de ocorrência recebida |
+| Auditoria | Armazenar os eventos nas Data Tables |
+| Processamento em lote | Executar múltiplas requisições de forma automatizada |
+| Tratamento de falhas | Direcionar erros HTTP para registro estruturado |
+| Consulta | Recuperar eventos armazenados por meio da API GET |
+| Formatação | Disponibilizar os dados em JSON padronizado |
+
+---
 
 ## 🧪 Testes realizados
 
-Foram realizados testes para verificar o
-funcionamento das automações e suas integrações.
+Foram realizados testes para verificar o funcionamento dos fluxos de automação e a comunicação entre os componentes da solução.
 
 | Cenário | Resultado |
 |---|---|
-| Recebimento de eventos do ESP32 | Validado |
-| Registro na Data Table | Validado |
-| Processamento em lote | Testado |
-| Requisições HTTP | Testadas |
-| Tratamento de falhas HTTP | Testado |
-| Consulta de eventos via API | Validada em teste |
-| Formatação da resposta JSON | Validada |
+| Recebimento de eventos por webhook HTTP POST | Validado |
+| Registro de eventos na Data Table | Validado |
+| Aplicação de regras de decisão | Validado |
+| Processamento de múltiplos itens | Testado |
+| Execução de requisições HTTP | Testada |
+| Tratamento de falha HTTP 404 | Validado |
+| Registro estruturado de exceções | Validado |
+| Consulta de eventos por API HTTP GET | Validada em teste |
+| Filtragem e organização dos dados em JavaScript | Validada |
+| Consumo da API na interface do MVP | Pendente de comprovação |
 
-Durante a validação da API, foram retornados
-21 eventos válidos, organizados do mais recente
-para o mais antigo.
+### Resultados observados
 
-As evidências das execuções estão disponíveis
-nas pastas `assets/`, `logs/` e `tests/`.
+Durante os testes de auditoria, foram registrados eventos relacionados à abertura e ao fechamento da cancela.
 
-## 📋 Documentação
+No processamento em lote, foram avaliados cenários de execução de requisições HTTP e tratamento de falhas, incluindo um teste controlado com resposta HTTP 404.
 
-A pasta `docs/` contém o relatório técnico do projeto,
-incluindo:
+Na execução de consulta apresentada no relatório técnico, o fluxo GET retornou **24 registros válidos**, organizados em JSON pelo código JavaScript.
+
+As evidências estão documentadas no relatório técnico e nos materiais de testes disponibilizados no repositório.
+
+---
+
+## 📋 Documentação técnica
+
+A pasta `docs/` reúne a documentação do projeto, incluindo:
 
 - Contextualização do problema CitizenTech.
 - Objetivos e escopo da automação.
-- Mapeamento do processo em BPMN.
+- Arquitetura da solução.
+- Modelagem do processo em BPMN.
 - Process Definition Document (PDD).
 - Regras de negócio.
 - Tratamento de exceções.
-- Estratégia de auditoria.
+- Auditoria e rastreabilidade.
 - Integração com o MVP.
-- Resultados dos testes.
+- Evidências dos testes.
+- Segurança, privacidade e LGPD.
+- Conclusão e resultados obtidos.
 
-A pasta também contém o Fluxograma do projeto.
+O relatório técnico apresenta a descrição dos três fluxos funcionais e as evidências utilizadas para validar as funcionalidades desenvolvidas.
+
+---
+
+## 📁 Estrutura do repositório
+
+A organização prevista para os arquivos da entrega é:
+
+```text
+Patio-Monitor-RPA/
+│
+├── README.md
+│
+├── N8N/
+│   └── smart_bus_gate_rpa_completo.json
+│
+├── docs/
+│   ├── relatorio_tecnico_rpa.pdf
+│   └── bpmn_smart_bus_gate.png
+│   └── fluxograma.png
+│
+├── assets/
+│   ├── fluxo_auditoria.png
+│   ├── fluxo_processamento_lote.png
+│   ├── fluxo_consulta_get.png
+│
+├── logs/
+│   └── auditoria_smart_bus_gate.csv
+│
+└── tests/
+    └── errodevalidacao.png
+    └── testedofluxocompleto.png
+```
+---
 
 ## ▶️ Como reproduzir a automação
 
-1. Criar uma conta ou acessar uma instância do n8n.
-2. Importar os arquivos JSON disponíveis em `workflows/`.
-3. Configurar os nós Webhook e Data Table.
-4. Criar as tabelas utilizadas pela automação.
-5. Configurar as credenciais de autenticação.
-6. Ativar os workflows conforme necessário.
-7. Enviar eventos de teste aos webhooks.
-8. Conferir os registros e resultados das execuções.
-9. Testar a consulta GET da API MVP.
+### Pré-requisitos
 
-As credenciais e chaves de autenticação não são
-disponibilizadas neste repositório por motivos
-de segurança.
+- Acesso a uma instância do n8n.
+- Arquivo JSON exportado do workflow.
+- Data Tables configuradas.
+- Credenciais necessárias para os endpoints autenticados.
+- Ferramenta para realizar requisições HTTP, como PowerShell ou Postman.
 
-## 🔐 Segurança e privacidade
+### Etapas
 
-O projeto utiliza autenticação por chave para
-proteger a consulta aos eventos.
+1. Acessar uma instância do n8n.
+2. Importar o arquivo JSON disponível na pasta `workflows/`.
+3. Verificar os três fluxos funcionais do workflow.
+4. Configurar os nós Webhook e seus respectivos caminhos.
+5. Criar ou selecionar as Data Tables utilizadas pela automação.
+6. Ajustar os nós de armazenamento e consulta para as tabelas correspondentes.
+7. Configurar as credenciais de autenticação necessárias.
+8. Salvar e publicar ou ativar o workflow, conforme a versão do n8n.
+9. Executar os testes de recebimento de eventos.
+10. Conferir os registros armazenados.
+11. Executar o processamento em lote.
+12. Testar a consulta GET e verificar a resposta JSON.
 
-As informações armazenadas são relacionadas ao
-funcionamento operacional do protótipo, sem
-necessidade de identificação pessoal de passageiros.
+### Observações importantes
 
-## 🌍 Contribuição para CitizenTech
+As credenciais e chaves de autenticação não são disponibilizadas no repositório público.
 
-A automação desenvolvida demonstra como soluções
-de IoT e RPA podem contribuir para a modernização
-de processos relacionados à mobilidade urbana.
+Após a importação, é necessário revisar as configurações de ambiente, as referências às Data Tables e os endpoints utilizados, pois esses elementos podem variar entre instâncias do n8n.
 
-O registro automatizado de eventos permite maior
-rastreabilidade e fornece informações que podem
-apoiar o acompanhamento operacional de pátios
-e terminais de ônibus.
+---
+
+## 🔐 Segurança, Privacidade e LGPD
+
+A segurança da informação foi considerada nas etapas de armazenamento e disponibilização dos registros operacionais.
+
+A API HTTP GET utiliza autenticação por meio do cabeçalho `x-api-key`, restringindo a consulta aos clientes que possuam a credencial configurada.
+
+As chaves de autenticação não devem ser expostas no repositório público nem incorporadas diretamente ao código executado pelo navegador.
+
+Para integração com o MVP, recomenda-se utilizar uma camada de backend para realizar as requisições autenticadas e proteger as credenciais.
+
+A resposta JSON disponibiliza apenas os campos necessários para consulta e visualização dos eventos, seguindo o princípio da minimização de dados.
+
+Na implementação atual, os registros são predominantemente técnicos e operacionais, sem identificação direta de passageiros.
+
+O projeto considera princípios da **Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018)**, especialmente segurança, necessidade e prevenção.
+
+Uma eventual implantação em ambiente real exigirá avaliações adicionais relacionadas a controle de acesso, proteção das informações, retenção dos registros e tratamento de possíveis dados pessoais.
+
+---
+
+## 🌍 Contribuição para CitizenTech e ODS
+
+O Pátio Monitor está alinhado à proposta **CitizenTech**, que incentiva o desenvolvimento de soluções tecnológicas voltadas à melhoria dos serviços e da qualidade de vida nas cidades.
+
+A automação desenvolvida demonstra como a integração entre IoT, Inteligência Artificial e RPA pode contribuir para a modernização de processos operacionais relacionados ao transporte coletivo.
+
+O projeto está relacionado a dois Objetivos de Desenvolvimento Sustentável (ODS):
+
+### ODS 9 — Indústria, Inovação e Infraestrutura
+
+A solução utiliza sensores, integração entre sistemas e automação de processos para demonstrar possibilidades de modernização e monitoramento de infraestrutura operacional.
+
+### ODS 11 — Cidades e Comunidades Sustentáveis
+
+O projeto apresenta uma proposta com potencial para apoiar a organização e a eficiência das operações relacionadas ao transporte coletivo, contribuindo indiretamente para os objetivos de mobilidade urbana sustentável.
+
+A iniciativa também se relaciona à **meta 11.2**, voltada ao acesso a sistemas de transporte seguros, acessíveis e sustentáveis.
+
+Por se tratar de um protótipo acadêmico, os benefícios operacionais e sociais representam resultados esperados, ainda não mensurados em ambiente real.
+
+---
 
 ## 🎥 Vídeo demonstrativo
 
 **Link:** [Adicionar link do vídeo]
 
-O vídeo apresenta o funcionamento das automações,
-as regras de decisão, os testes realizados e a
-integração com o Smart Bus Gate.
+O vídeo demonstrativo apresenta o funcionamento da automação desenvolvida no n8n, incluindo:
 
-## 🔗 Links do projeto
-
-- **Simulação Wokwi:**
-  https://wokwi.com/projects/480155608742885377
-- **Repositório Maker Lab:** https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26.git
-- **MVP Pátio Monitor:** [Adicionar link]
-- **Vídeo RPA:** [Adicionar link]
+- Estrutura dos três fluxos funcionais.
+- Recebimento e registro de eventos.
+- Processamento em lote.
+- Aplicação de regras de decisão.
+- Tratamento de falhas HTTP.
+- Consulta dos registros por meio da API GET.
+- Integração com o projeto Smart Bus Gate.
 
 ---
 
-**FIAP — Global Solution 2026.2**
+## 🔗 Links do projeto
 
+- **Simulação Smart Bus Gate — Wokwi:**  
+  https://wokwi.com/projects/480155608742885377
+
+- **Repositório Smart Bus Gate — Maker Lab:**  
+  https://github.com/camilapadalino/SmartBusGate_PatioMonitorGS26
+
+- **MVP Pátio Monitor:**  
+  [Adicionar link do MVP]
+
+- **Vídeo demonstrativo RPA:**  
+  [Adicionar link do vídeo]
+
+---
+
+**FIAP — Global Solution 2026.2**  
 **Pátio Monitor | Smart Bus Gate | CitizenTech**
