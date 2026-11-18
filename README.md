@@ -1,6 +1,6 @@
 # 🚌 Pátio Monitor | Automação RPA
 
-**Global Solution 2026.2 — FIAP**   
+**Global Solution 2026.2 - FIAP**   
 **Disciplina:** Robotic Process Automation (RPA)
 
 ## 👥 Integrantes
