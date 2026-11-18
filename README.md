@@ -16,7 +16,7 @@
 ## 🔗 Links do projeto
 
 - **MVP Pátio Monitor:**  
-  https://patio-monitor-production.up.railway.app/?utm_source=chatgpt.com
+  https://patio-monitor-production.up.railway.app/
 
 - **Vídeo demonstrativo RPA:**  
   https://www.youtube.com/watch?v=5r3gIS0Ebfg
@@ -79,13 +79,15 @@ A automação RPA foi desenvolvida com os seguintes objetivos:
 
 ## 🔄 Arquitetura da solução
 
-A automação foi desenvolvida na plataforma **n8n Cloud**, sendo organizada em um único workflow denominado **Smart Bus Gate – RPA Completo**.
+A automação foi desenvolvida na plataforma **n8n Cloud**, sendo organizada em um único workflow denominado **Smart Bus Gate - RPA Completo**.
 
 Esse workflow reúne três fluxos funcionais, cada um com responsabilidades e formas de acionamento específicas.
 
 ### Fluxo 1 — Auditoria de Eventos
 
-Responsável pelo recebimento, validação, classificação e armazenamento dos eventos operacionais enviados pelo ESP32.
+Responsável pelo recebimento, validação, classificação e armazenamento
+dos eventos operacionais do Smart Bus Gate, representados por
+requisições HTTP POST ao webhook do n8n.
 
 ```text
 ESP32 / Wokwi
@@ -279,19 +281,6 @@ Cada evento contém os seguintes campos:
 
 O exemplo apresenta a estrutura de um registro individual. O campo `total` varia conforme a quantidade de eventos válidos disponíveis no momento da consulta.
 
-### Recomendações de integração
-
-Para integração com o MVP, recomenda-se:
-
-- Realizar as requisições autenticadas por uma camada de backend.
-- Manter a chave de autenticação fora do código frontend.
-- Utilizar o campo `eventos` para alimentar tabelas, indicadores e histórico operacional.
-- Utilizar `total` para apresentar a quantidade de registros retornados.
-- Considerar os campos `evento` e `data_hora` para organização e visualização das ocorrências.
-- Tratar situações de indisponibilidade da API e respostas de acesso negado.
-
-A API foi implementada e validada em testes de consulta. O consumo diretamente na interface do MVP constitui uma etapa de integração entre os componentes do projeto.
-
 ---
 
 ## 📊 Regras de negócio
@@ -326,7 +315,7 @@ Foram realizados testes para verificar o funcionamento dos fluxos de automação
 | Registro estruturado de exceções | Validado |
 | Consulta de eventos por API HTTP GET | Validada em teste |
 | Filtragem e organização dos dados em JavaScript | Validada |
-| Consumo da API na interface do MVP | Pendente de comprovação |
+| Visualização dos eventos na interface do MVP | Demonstrada com evidências no relatório técnico |
 
 ### Resultados observados
 
@@ -334,7 +323,7 @@ Durante os testes de auditoria, foram registrados eventos relacionados à abertu
 
 No processamento em lote, foram avaliados cenários de execução de requisições HTTP e tratamento de falhas, incluindo um teste controlado com resposta HTTP 404.
 
-Na execução de consulta apresentada no relatório técnico, o fluxo GET retornou **24 registros válidos**, organizados em JSON pelo código JavaScript.
+Na execução de consulta apresentada no relatório técnico, o fluxo GET retornou **29 registros válidos**, organizados em JSON pelo código JavaScript.
 
 As evidências estão documentadas no relatório técnico e nos materiais de testes disponibilizados no repositório.
 
@@ -469,7 +458,7 @@ Por se tratar de um protótipo acadêmico, os benefícios operacionais e sociais
 
 ## 🎥 Vídeo demonstrativo
 
-**Link:** [Adicionar link do vídeo]
+**Link:** https://www.youtube.com/watch?v=5r3gIS0Ebfg
 
 O vídeo demonstrativo apresenta o funcionamento da automação desenvolvida no n8n, incluindo:
 
