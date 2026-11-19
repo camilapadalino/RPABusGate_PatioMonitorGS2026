@@ -29,7 +29,15 @@
 
 ## 📌 Sobre o projeto
 
-O **Pátio Monitor** é uma proposta de monitoramento inteligente voltada à organização, ao acompanhamento e à rastreabilidade das operações em pátios e terminais de ônibus. O projeto integra tecnologias de Internet das Coisas (IoT), Inteligência Artificial (IA) e automação de processos para demonstrar como soluções digitais podem apoiar a gestão operacional do transporte coletivo.
+Imagine um terminal de ônibus onde os operadores precisam acompanhar constantemente a entrada, a saída e a permanência dos veículos.
+
+Quando essas informações não estão centralizadas, o controle operacional se torna mais difícil, podendo gerar atrasos, falhas de comunicação e dificuldades para identificar situações inesperadas.
+
+Foi pensando nesse problema que surgiu o **Pátio Monitor**! 🚌📍
+
+Nossa proposta é desenvolver uma plataforma de monitoramento inteligente para pátios, garagens e terminais, reunindo informações operacionais em um único ambiente. O projeto integra tecnologias de Internet das Coisas (IoT), Inteligência Artificial (IA) e automação de processos para demonstrar como soluções digitais podem apoiar a gestão operacional do transporte coletivo.
+
+> 💡 **Nossa missão:** transformar dados capturados por sensores em informações úteis para uma operação mais inteligente, segura e organizada.
 
 Como parte da solução, desenvolvemos o **Smart Bus Gate**, um protótipo de cancela automatizada que utiliza um microcontrolador ESP32, sensor ultrassônico, sensor PIR e servomotor para controlar a abertura e o fechamento da cancela de acordo com as condições identificadas no ambiente.
 
